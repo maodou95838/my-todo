@@ -2,6 +2,10 @@ plugins {
     id 'java'
 }
 
+allprojects {
+    apply plugin: 'idea'
+}
+
 group 'org.jackie'
 version '1.0-SNAPSHOT'
 
