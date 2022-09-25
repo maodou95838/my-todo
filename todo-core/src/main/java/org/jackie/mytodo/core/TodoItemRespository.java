@@ -1,6 +1,11 @@
 package org.jackie.mytodo.core;
 
+import java.util.List;
+
 public interface TodoItemRespository {
 
-    TodoParameter save(TodoItem todoItem);
+    TodoItem save(TodoItem todoItem);
+
+    List<TodoItem> findAll();
+
 }
