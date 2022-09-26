@@ -1,4 +1,4 @@
-package org.jackie.mytodo.core;
+package org.jackie.mytodo.core.parameter;
 
 import lombok.Getter;
 

@@ -1,9 +1,15 @@
-package org.jackie.mytodo.core;
+package org.jackie.mytodo.core.service;
 
+import com.google.common.collect.ImmutableList;
+import org.jackie.mytodo.core.model.TodoItem;
+import org.jackie.mytodo.core.parameter.TodoIndexParameter;
+import org.jackie.mytodo.core.parameter.TodoParameter;
+import org.jackie.mytodo.core.repository.TodoItemRespository;
+import org.jackie.mytodo.core.service.TodoItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -25,14 +31,9 @@ public class TodoItemServiceTest {
 
     @Test
     public void should_add_todo_item() {
-//        TodoItemRespository respository = mock(TodoItemRespository.class);
-
         when(respository.save(any())).then(returnsFirstArg());
-
-//        TodoItemService service = new TodoItemService(respository);
         TodoItem item = service.addTodoItem(new TodoParameter("foo"));
         assertThat(item.getContent()).isEqualTo("foo");
-        System.out.println("hahaha");
     }
 
     @Test
@@ -43,6 +44,12 @@ public class TodoItemServiceTest {
 
     @Test
     public void should_mark_todo_item_as_done() {
-        when(respository.findAll()).thenReturn()
+        when(respository.findAll()).thenReturn(ImmutableList.of(new TodoItem("foo")));
+        when(respository.save(any())).then(returnsFirstArg());
+
+        final Optional<TodoItem> todoItem = service.markTodoItemDone(TodoIndexParameter.of(1));
+        assertThat(todoItem).isPresent();
+        final TodoItem actual = todoItem.get();
+        assertThat(actual.isDone()).isTrue();
     }
 }
