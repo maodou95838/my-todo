@@ -5,9 +5,11 @@ import org.jackie.mytodo.core.parameter.TodoIndexParameter;
 import org.jackie.mytodo.core.parameter.TodoParameter;
 import org.jackie.mytodo.core.repository.TodoItemRespository;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class TodoItemService {
@@ -18,6 +20,11 @@ public class TodoItemService {
         this.respository = respository;
     }
 
+    /**
+     * 添加任务
+     * @param parameter
+     * @return
+     */
     public TodoItem addTodoItem(TodoParameter parameter) {
         if (parameter == null) {
             throw new IllegalArgumentException("parameter is null!");
@@ -28,37 +35,32 @@ public class TodoItemService {
     }
 
 
+    /**
+     * 标记任务完成
+     * @param index
+     * @return
+     */
     public Optional<TodoItem> markTodoItemDone(TodoIndexParameter index) {
         List<TodoItem> all = respository.findAll();
-        Optional<TodoItem> todoItem =
+        Optional<TodoItem> optionalTodoItem =
                 all.stream().filter(e -> e.getIndex() == index.getIndex()).findFirst();
 
-//        Iterable<TodoItem> iter = respository.findAll2();
-//        Optional<TodoItem> todoItem1 = StreamSupport.stream(iter.spliterator(), false)
-//                .filter(e -> e.getIndex() == index.getIndex())
-//                .findFirst();
-        TodoItem test1 = todoItem.get();
-        test1.markDone();
-
-//        Optional<TodoItem> test2 = todoItem.map(e -> e.markDone());
-//        Optional<TodoItem> test3 = todoItem.flatMap(e -> e.markDone());
-//
-//
-//        Optional<TodoItem> test4 = todoItem.flatMap(e -> e.);
-
-        todoItem.ifPresent(item ->item.markDone());
-
-
-        return todoItem;
+        return optionalTodoItem.flatMap(this :: doMarkAsDone);
     }
 
     private Optional<TodoItem> doMarkAsDone(final TodoItem todoItem) {
         todoItem.markDone();
         return Optional.of(respository.save(todoItem));
     }
-//
-//    public List<TodoItem> list() {
-//        return Collections.EMPTY_LIST;
-//    }
+
+    /**
+     * 查全部
+     * @param all
+     * @return
+     */
+    public List<TodoItem> list(final boolean all) {
+        return respository.findAll().stream()
+                .filter(e -> (all || e.isDone())).collect(Collectors.toList());
+    }
 
 }

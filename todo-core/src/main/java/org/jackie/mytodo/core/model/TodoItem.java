@@ -13,9 +13,14 @@ public class TodoItem {
 
     public TodoItem(final String content) {
         this.content = content;
+        this.done = false;
     }
 
     public void markDone() {
         this.done = true;
+    }
+
+    public void assignIndex(int index) {
+        this.index = index;
     }
 }

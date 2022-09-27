@@ -2,21 +2,23 @@ plugins {
     id 'java'
 }
 
-allprojects {
-    apply plugin: 'idea'
-}
-
 group 'org.jackie'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-}
+}-
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
+
+allprojects {
+    apply plugin: 'idea'
+}
+
+apply plugin: 'checkstyle'
 
 test {
     useJUnitPlatform()

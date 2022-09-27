@@ -7,18 +7,18 @@ import java.util.List;
 
 public interface TodoItemRespository {
 
-    TodoItem save(TodoItem todoItem);
-
-    List<TodoItem> findAll();
-
     /**
-     * 使用iterator
+     * save
+     * @param todoItem
      * @return
      */
-    Iterable<TodoItem> findAll2();
+    TodoItem save(TodoItem todoItem);
 
-    TodoItem update(TodoItem todoItem);
+    /**
+     * findAll
+     * @return
+     */
+    List<TodoItem> findAll();
 
-    TodoItem findByIndex(TodoItem todoItem);
 
 }
