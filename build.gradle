@@ -20,6 +20,8 @@ allprojects {
 
 apply plugin: 'checkstyle'
 
+apply plugin: 'jacoco'
+
 test {
     useJUnitPlatform()
 }
