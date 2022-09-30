@@ -1,23 +1,21 @@
 package org.jackie.mytodo.core.service;
 
 import com.google.common.collect.ImmutableList;
-import com.sun.org.apache.bcel.internal.generic.IMUL;
 import org.jackie.mytodo.core.model.TodoItem;
 import org.jackie.mytodo.core.parameter.TodoIndexParameter;
 import org.jackie.mytodo.core.parameter.TodoParameter;
 import org.jackie.mytodo.core.repository.TodoItemRespository;
-import org.jackie.mytodo.core.service.TodoItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 public class TodoItemServiceTest {

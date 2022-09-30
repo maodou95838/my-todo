@@ -1,11 +1,16 @@
 package org.jackie.mytodo.core.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TodoItem {
 
-    private final String content;
+    private String content;
 
     private boolean done;
 
